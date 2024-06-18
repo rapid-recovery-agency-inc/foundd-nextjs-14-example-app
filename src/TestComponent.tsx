@@ -1,7 +1,7 @@
 import {headers} from 'next/headers'
 
 
-async function getData() {
+async function getData(_ignoredInput:any) {
     const res = await fetch('https://dev.api.foundd.io/graphql', {
         method: 'POST',
         headers: {
@@ -28,8 +28,7 @@ async function getData() {
 
 export default async function TestComponent() {
     const headersList = headers()
-    console.log("headersList:", headersList);
     const referer = headersList.get('referer');
-    console.log("getData:", await getData());
+    console.log("getData:", await getData(headersList));
     return <div>Referer: {referer}</div>
 }
